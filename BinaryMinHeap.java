@@ -133,7 +133,22 @@ public class BinaryMinHeap <T extends Comparable<T>> implements MyPriorityQueue<
     // Remove the item at the given index.
     // Make sure to maintain the heap property!
     private T remove(int index){
-        return null;
+        // If array is empty throw an IllegalStateException
+        if (this.size == 0) {
+            throw new IllegalStateException("The min heap is empty");
+        }
+        // Decrement size
+        this.size--;
+        // Remove the item at index from the itemToIndex hashmap
+        itemToIndex.remove(this.arr[index]);
+        // Store the relevant nodes data
+        T targetVal = this.arr[index];
+        // Copy value at the end of the array to the target index
+        this.arr[index] = this.arr[size];
+        // Percolate the new node down
+        percolateDown(index);
+        // Return the stored target value
+        return targetVal;
     }
 
     // We have provided a recommended implementation
