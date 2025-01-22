@@ -93,9 +93,7 @@ public class BinaryMinHeap <T extends Comparable<T>> implements MyPriorityQueue<
     // copy all items into a larger array to make more room.
     private void resize(){
         T[] larger = (T[]) Array.newInstance(Comparable.class, arr.length*2);
-        for (int i = 0; i < this.arr.length; i++) {
-            larger[i] = this.arr[i];
-        }
+        System.arraycopy(this.arr, 0, larger, 0, this.arr.length);
         this.arr = larger;
     }
 
