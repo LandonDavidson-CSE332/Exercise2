@@ -43,12 +43,10 @@ public class BinaryMinHeap <T extends Comparable<T>> implements MyPriorityQueue<
         int parent_index = getParent(i);
         // Loop until value of parent is not greater than value of child
         while (this.arr[parent_index].compareTo(this.arr[i]) > 0) {
-            // Save parent item
-            T parent_item = this.arr[parent_index];
             // Move value of parent to child index
             this.arr[i] = this.arr[parent_index];
             // Change parents index in itemToIndex hashmap
-            this.itemToIndex.replace(parent_item, i);
+            this.itemToIndex.replace(this.arr[i], i);
             // Move index to parent index
             i = parent_index;
             // Calculate new parent index
@@ -83,8 +81,10 @@ public class BinaryMinHeap <T extends Comparable<T>> implements MyPriorityQueue<
                 lowestIndex = this.arr[leftIndex].compareTo(this.arr[rightIndex]) < 0 ? leftIndex : rightIndex;
             }
             // If current value greater than the lowest child's, copy child to current index
-            if (arr[i].compareTo(arr[lowestIndex]) > 0) {
-                arr[i] = arr[lowestIndex];
+            if (this.arr[i].compareTo(this.arr[lowestIndex]) > 0) {
+                this.arr[i] = this.arr[lowestIndex];
+                // Update child's index in itemToIndex hashmap
+                this.itemToIndex.replace(this.arr[i], i);
             } else {
                 // Else the min heap property has been restored, and we can break from the loop
                 break;
@@ -92,6 +92,8 @@ public class BinaryMinHeap <T extends Comparable<T>> implements MyPriorityQueue<
             // Set i to the lowest index to move down a level
             i = lowestIndex;
         }
+        // Add percolated item to itemToIndex hashmap
+        this.itemToIndex.put(this.arr[i], i);
         // Copy saved value into the hole we created
         this.arr[i] = finalItem;
     }
