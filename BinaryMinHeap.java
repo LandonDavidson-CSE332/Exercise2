@@ -168,6 +168,12 @@ public class BinaryMinHeap <T extends Comparable<T>> implements MyPriorityQueue<
     // Determine whether to percolate up/down
     // the item at the given index, then do it!
     private void updatePriority(int index){
+        // If parent value is greater than index's then percolate up, otherwise go down
+        if (this.arr[index].compareTo(this.arr[getParent(index)]) < 0) {
+            percolateUp(index);
+        } else {
+            percolateDown(index);
+        }
     }
 
     // This method gets called after the client has 
