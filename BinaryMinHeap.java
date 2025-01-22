@@ -114,7 +114,20 @@ public class BinaryMinHeap <T extends Comparable<T>> implements MyPriorityQueue<
 
 
     public T extract(){
-        return null;
+        // If array is empty throw an IllegalStateException
+        if (this.size == 0) {
+            throw new IllegalStateException("The min heap is empty");
+        }
+        // Decrement size
+        this.size--;
+        // Store the root node value
+        T minVal = this.arr[0];
+        // Copy value at end of array to the head
+        this.arr[0] = this.arr[this.size];
+        // Percolate new root down
+        percolateDown(0);
+        // Return stored minimum value
+        return minVal;
     }
 
     // Remove the item at the given index.
