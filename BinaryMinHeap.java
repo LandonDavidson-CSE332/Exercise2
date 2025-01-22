@@ -29,7 +29,7 @@ public class BinaryMinHeap <T extends Comparable<T>> implements MyPriorityQueue<
     private int getLeftChild(int i){
         return i * 2 + 1;
     }
-    // Returjn index of i's right child
+    // Return index of i's right child
     private int getRightChild(int i){
         return i * 2 + 2;
     }
@@ -61,8 +61,33 @@ public class BinaryMinHeap <T extends Comparable<T>> implements MyPriorityQueue<
         T finalItem = arr[i];
         // Infinite while loop to be broken out of by interior if statements
         while (true) {
-
+            // Find and store both children's indices, assign -1 if out of current size bounds
+            int leftIndex = getLeftChild(i) >= this.size ? -1 : getLeftChild(i);
+            int rightIndex = getRightChild(i) >= this.size ? -1 : getRightChild(i);
+            int lowestIndex;
+            // If left child is out of bounds then i is a leaf, and we are done
+            if (leftIndex == -1) {
+                break;
+            }
+            // If only right child is out of bounds set the lowest child as left
+            if (rightIndex == -1) {
+                lowestIndex = leftIndex;
+            } else {
+                // If both are in bounds then find child with the lowest value
+                lowestIndex = this.arr[leftIndex].compareTo(this.arr[rightIndex]) < 0 ? leftIndex : rightIndex;
+            }
+            // If current value greater than the lowest child's, copy child to current index
+            if (arr[i].compareTo(arr[lowestIndex]) > 0) {
+                arr[i] = arr[lowestIndex];
+            } else {
+                // Else the min heap property has been restored, and we can break from the loop
+                break;
+            }
+            // Set i to the lowest index to move down a level
+            i = lowestIndex;
         }
+        // Copy saved value into the hole we created
+        this.arr[i] = finalItem;
     }
 
     // copy all items into a larger array to make more room.
