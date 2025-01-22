@@ -26,18 +26,20 @@ public class BinaryMinHeap <T extends Comparable<T>> implements MyPriorityQueue<
     }
 
     // Return the indices of the given index's children in the format (left child index, right child index)
-    private (int, int) getChildren(int i) {
+    private int[] getChildren(int i) {
         int leftIndex = i * 2 + 1;
         int rightIndex = i * 2 + 2;
-        return (leftIndex, rightIndex);
+        return new int[] {leftIndex, rightIndex};
     }
 
     // move the item at index i "rootward" until
     // the heap property holds
     private void percolateUp(int i){
-        while (arr[int parent_index getParent(i)] < arr[i]) {
+        int parent_index = getParent(i);
+        while (arr[parent_index].compareTo(arr[i]) < 0) {
             arr[i] = arr[parent_index];
             i = parent_index;
+            parent_index = getParent(i);
         }
     }
 
@@ -56,11 +58,13 @@ public class BinaryMinHeap <T extends Comparable<T>> implements MyPriorityQueue<
 
 
     public T extract(){
+        return null;
     }
 
     // Remove the item at the given index.
     // Make sure to maintain the heap property!
     private T remove(int index){
+        return null;
     }
 
     // We have provided a recommended implementation
