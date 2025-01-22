@@ -120,6 +120,8 @@ public class BinaryMinHeap <T extends Comparable<T>> implements MyPriorityQueue<
         }
         // Decrement size
         this.size--;
+        // Remove the current root from the itemToIndex hashmap
+        this.itemToIndex.remove(this.arr[0]);
         // Store the root node value
         T minVal = this.arr[0];
         // Copy value at end of array to the head
@@ -140,7 +142,7 @@ public class BinaryMinHeap <T extends Comparable<T>> implements MyPriorityQueue<
         // Decrement size
         this.size--;
         // Remove the item at index from the itemToIndex hashmap
-        itemToIndex.remove(this.arr[index]);
+        this.itemToIndex.remove(this.arr[index]);
         // Store the relevant nodes data
         T targetVal = this.arr[index];
         // Copy value at the end of the array to the target index
