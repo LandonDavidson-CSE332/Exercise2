@@ -38,20 +38,26 @@ public class BinaryMinHeap <T extends Comparable<T>> implements MyPriorityQueue<
     // the heap property holds
     private void percolateUp(int i){
         // Save current item at i to copy after percolate up
-        T finalItem = arr[i];
+        T finalItem = this.arr[i];
         // Calculate parents index to initialize while loop
         int parent_index = getParent(i);
         // Loop until value of parent is not greater than value of child
-        while (arr[parent_index].compareTo(arr[i]) > 0) {
+        while (this.arr[parent_index].compareTo(this.arr[i]) > 0) {
+            // Save parent item
+            T parent_item = this.arr[parent_index];
             // Move value of parent to child index
-            arr[i] = arr[parent_index];
+            this.arr[i] = this.arr[parent_index];
+            // Change parents index in itemToIndex hashmap
+            this.itemToIndex.replace(parent_item, i);
             // Move index to parent index
             i = parent_index;
             // Calculate new parent index
             parent_index = getParent(i);
         }
+        // Add the percolated item to itemToIndex hashmap
+        this.itemToIndex.replace(this.arr[i], i);
         // Copy the original value to the hole we created
-        arr[i] = finalItem;
+        this.arr[i] = finalItem;
     }
 
     // move the item at index i "leafward" until
