@@ -100,6 +100,16 @@ public class BinaryMinHeap <T extends Comparable<T>> implements MyPriorityQueue<
     }
 
     public void insert(T item){
+        // If array is full then resize
+        if (this.size == this.arr.length) {
+            resize();
+        }
+        // Put item in the first empty spot of the array
+        this.arr[size] = item;
+        // Percolate the new item up
+        percolateUp(size);
+        // Increment size
+        this.size++;
     }
 
 
