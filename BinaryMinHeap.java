@@ -21,15 +21,17 @@ public class BinaryMinHeap <T extends Comparable<T>> implements MyPriorityQueue<
     }
 
     // Return the index of the given index's parent
-    private int getParent(int i) {
+    private int getParent(int i){
         return i / 2;
     }
 
-    // Return the indices of the given index's children in the format (left child index, right child index)
-    private int[] getChildren(int i) {
-        int leftIndex = i * 2 + 1;
-        int rightIndex = i * 2 + 2;
-        return new int[] {leftIndex, rightIndex};
+    // Return index of i's left child
+    private int getLeftChild(int i){
+        return i * 2 + 1;
+    }
+    // Returjn index of i's right child
+    private int getRightChild(int i){
+        return i * 2 + 2;
     }
 
     // move the item at index i "rootward" until
@@ -55,6 +57,12 @@ public class BinaryMinHeap <T extends Comparable<T>> implements MyPriorityQueue<
     // move the item at index i "leafward" until
     // the heap property holds
     private void percolateDown(int i){
+        // Save value at i to be copied after loop
+        T finalItem = arr[i];
+        // Infinite while loop to be broken out of by interior if statements
+        while (true) {
+
+        }
     }
 
     // copy all items into a larger array to make more room.
