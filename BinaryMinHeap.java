@@ -20,9 +20,25 @@ public class BinaryMinHeap <T extends Comparable<T>> implements MyPriorityQueue<
         itemToIndex = new HashMap<>();
     }
 
+    // Return the index of the given index's parent
+    private int getParent(int i) {
+        return i / 2;
+    }
+
+    // Return the indices of the given index's children in the format (left child index, right child index)
+    private (int, int) getChildren(int i) {
+        int leftIndex = i * 2 + 1;
+        int rightIndex = i * 2 + 2;
+        return (leftIndex, rightIndex);
+    }
+
     // move the item at index i "rootward" until
     // the heap property holds
     private void percolateUp(int i){
+        while (arr[int parent_index getParent(i)] < arr[i]) {
+            arr[i] = arr[parent_index];
+            i = parent_index;
+        }
     }
 
     // move the item at index i "leafward" until
