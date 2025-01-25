@@ -128,7 +128,7 @@ public class BinaryMaxHeap <T extends Comparable<T>> implements MyPriorityQueue<
     public T extract() {
         // If array is empty throw an IllegalStateException
         if (this.size == 0) {
-            throw new IllegalStateException("The min heap is empty");
+            throw new IllegalStateException("The max heap is empty");
         }
         // Decrement size
         this.size--;
@@ -150,7 +150,7 @@ public class BinaryMaxHeap <T extends Comparable<T>> implements MyPriorityQueue<
     public T peek() {
         // If array is empty throw an IllegalStateException
         if (this.size == 0) {
-            throw new IllegalStateException("The min heap is empty");
+            throw new IllegalStateException("The max heap is empty");
         }
         // Else return the root value
         return arr[0];
