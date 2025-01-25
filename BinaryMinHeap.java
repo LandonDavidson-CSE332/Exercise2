@@ -22,7 +22,7 @@ public class BinaryMinHeap <T extends Comparable<T>> implements MyPriorityQueue<
 
     // Return the index of the given index's parent
     private int getParent(int i){
-        return i / 2;
+        return (i - 1) / 2;
     }
 
     // Return index of i's left child
@@ -42,7 +42,7 @@ public class BinaryMinHeap <T extends Comparable<T>> implements MyPriorityQueue<
         // Calculate parents index to initialize while loop
         int parent_index = getParent(i);
         // Loop until value of parent is not greater than value of child or we reach the root
-        while (this.arr[parent_index].compareTo(finalItem) > 0 && i != 0) {
+        while (i != 0 && this.arr[parent_index].compareTo(finalItem) > 0) {
             // Move value of parent to child index
             this.arr[i] = this.arr[parent_index];
             // Change parents index in itemToIndex hashmap
@@ -53,7 +53,7 @@ public class BinaryMinHeap <T extends Comparable<T>> implements MyPriorityQueue<
             parent_index = getParent(parent_index);
         }
         // Add the percolated item to itemToIndex hashmap
-        this.itemToIndex.replace(this.arr[i], i);
+        this.itemToIndex.replace(finalItem, i);
         // Copy the original value to the hole we created
         this.arr[i] = finalItem;
     }
@@ -93,7 +93,7 @@ public class BinaryMinHeap <T extends Comparable<T>> implements MyPriorityQueue<
             i = lowestIndex;
         }
         // Add percolated item to itemToIndex hashmap
-        this.itemToIndex.replace(this.arr[i], i);
+        this.itemToIndex.replace(finalItem, i);
         // Copy saved value into the hole we created
         this.arr[i] = finalItem;
     }
@@ -191,7 +191,7 @@ public class BinaryMinHeap <T extends Comparable<T>> implements MyPriorityQueue<
     // We have provided a recommended implementation
     // You're welcome to do something different, though!
     public void updatePriority(T item){
-	if(!itemToIndex.containsKey(item)){
+	    if(!itemToIndex.containsKey(item)){
             throw new IllegalArgumentException("Given item is not present in the priority queue!");
 	}
         updatePriority(itemToIndex.get(item));
@@ -215,6 +215,11 @@ public class BinaryMinHeap <T extends Comparable<T>> implements MyPriorityQueue<
     // We have provided a recommended implementation
     // You're welcome to do something different, though!
     public T peek(){
+        // If array is empty throw an IllegalStateException
+        if (this.size == 0) {
+            throw new IllegalStateException("The min heap is empty");
+        }
+        // Else return the root value
         return arr[0];
     }
     
