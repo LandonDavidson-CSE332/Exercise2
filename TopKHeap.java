@@ -39,6 +39,8 @@ public class TopKHeap<T extends Comparable<T>> {
         // Then add it to the rest max heap and back to itemToHeap
         this.itemToHeap.put(item, rest);
         this.rest.insert(kickedItem);
+        // Iterate size
+        this.size++;
     }
 
     // Indicates whether the given item is among the 
@@ -83,6 +85,8 @@ public class TopKHeap<T extends Comparable<T>> {
         }
         // Remove the item from the heap since we don't need it
         heap.remove(item);
+        // Decrement size
+        this.size--;
         // If heap is rest then we can return now since we are done
         if (heap == this.rest) {
             return;
