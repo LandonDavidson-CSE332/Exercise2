@@ -82,7 +82,7 @@ public class BinaryMaxHeap <T extends Comparable<T>> implements MyPriorityQueue<
                 highestIndex = this.arr[leftIndex].compareTo(this.arr[rightIndex]) > 0 ? leftIndex : rightIndex;
             }
             // If current value less than the highest child's, copy child to current index
-            if (this.arr[i].compareTo(this.arr[highestIndex]) < 0) {
+            if (finalItem.compareTo(this.arr[highestIndex]) < 0) {
                 this.arr[i] = this.arr[highestIndex];
                 // Update child's index in itemToIndex hashmap
                 this.itemToIndex.replace(this.arr[i], i);
