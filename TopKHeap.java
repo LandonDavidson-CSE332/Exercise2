@@ -24,7 +24,7 @@ public class TopKHeap<T extends Comparable<T>> {
     // k then the list will contain all items.
     // The running time of this method should be O(k).
     public List<T> topK(){
-        return null;
+        return this.topK.toList();
     }
 
     // Add the given item into the data structure.
