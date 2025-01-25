@@ -75,5 +75,20 @@ public class TopKHeap<T extends Comparable<T>> {
     // is not present.
     // The running time of this method should be O(log(n)+log(k)).
     public void remove(T item){
+        // Find what heap the item is currently in
+        MyPriorityQueue<T> heap = this.itemToHeap.get(item);
+        // If heap is null than item isn't in either and throw an error
+        if (heap == null) {
+            throw new IllegalArgumentException();
+        }
+        // Remove the item from the heap since we don't need it
+        heap.remove(item);
+        // If heap is rest then we can return now since we are done
+        if (heap == this.rest) {
+            return;
+        }
+        // Otherwise we have to add the min item from rest to topK
+        T promotedItem = rest.extract();
+        topK.insert(promotedItem);
     }
 }
