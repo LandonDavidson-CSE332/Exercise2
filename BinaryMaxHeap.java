@@ -27,8 +27,8 @@ public class BinaryMaxHeap <T extends Comparable<T>> implements MyPriorityQueue<
         T finalItem = this.arr[i];
         // Calculate parents index to initialize while loop
         int parent_index = getParent(i);
-        // Loop until value of parent is not greater than value of child or we reach the root
-        while (this.arr[parent_index].compareTo(finalItem) > 0 && i != 0) {
+        // Loop until value of parent is not less than value of child or we reach the root
+        while (this.arr[parent_index].compareTo(finalItem) < 0 && i != 0) {
             // Move value of parent to child index
             this.arr[i] = this.arr[parent_index];
             // Change parents index in itemToIndex hashmap
