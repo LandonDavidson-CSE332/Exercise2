@@ -33,7 +33,11 @@ public class TopKHeap<T extends Comparable<T>> {
         // Add item into the topK min heap and itemToHeap hashmap
         this.topK.insert(item);
         this.itemToHeap.put(item, this.topK);
-        // Now remove the minimum value from topK and itemToHeap
+        // If topK.size still less than or equal to k we are done so return
+        if (this.topK.size() <= this.k) {
+            return;
+        }
+        // Otherwise there are k + 1 players in topK so remove the minimum value from topK and itemToHeap
         T kickedItem = this.topK.extract();
         this.itemToHeap.remove(item);
         // Then add it to the rest max heap and back to itemToHeap
