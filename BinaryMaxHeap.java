@@ -54,29 +54,29 @@ public class BinaryMaxHeap <T extends Comparable<T>> implements MyPriorityQueue<
             // Find and store both children's indices, assign -1 if out of current size bounds
             int leftIndex = getLeftChild(i) >= this.size ? -1 : getLeftChild(i);
             int rightIndex = getRightChild(i) >= this.size ? -1 : getRightChild(i);
-            int lowestIndex;
+            int highestIndex;
             // If left child is out of bounds then i is a leaf, and we are done
             if (leftIndex == -1) {
                 break;
             }
-            // If only right child is out of bounds set the lowest child as left
+            // If only right child is out of bounds set the highest child as left
             if (rightIndex == -1) {
-                lowestIndex = leftIndex;
+                highestIndex = leftIndex;
             } else {
-                // If both are in bounds then find child with the lowest value
-                lowestIndex = this.arr[leftIndex].compareTo(this.arr[rightIndex]) < 0 ? leftIndex : rightIndex;
+                // If both are in bounds then find child with the highest value
+                highestIndex = this.arr[leftIndex].compareTo(this.arr[rightIndex]) > 0 ? leftIndex : rightIndex;
             }
-            // If current value greater than the lowest child's, copy child to current index
-            if (this.arr[i].compareTo(this.arr[lowestIndex]) > 0) {
-                this.arr[i] = this.arr[lowestIndex];
+            // If current value less than the highest child's, copy child to current index
+            if (this.arr[i].compareTo(this.arr[highestIndex]) < 0) {
+                this.arr[i] = this.arr[highestIndex];
                 // Update child's index in itemToIndex hashmap
                 this.itemToIndex.replace(this.arr[i], i);
             } else {
                 // Else the min heap property has been restored, and we can break from the loop
                 break;
             }
-            // Set i to the lowest index to move down a level
-            i = lowestIndex;
+            // Set i to the highest index to move down a level
+            i = highestIndex;
         }
         // Add percolated item to itemToIndex hashmap
         this.itemToIndex.replace(this.arr[i], i);
