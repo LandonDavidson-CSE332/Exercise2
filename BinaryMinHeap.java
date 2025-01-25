@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.ArrayList;
 
 public class BinaryMinHeap <T extends Comparable<T>> implements MyPriorityQueue<T> {
+
     private int size; // Maintains the size of the data structure
     private T[] arr; // The array containing all items in the data structure
                      // index 0 must be utilized
@@ -105,6 +106,7 @@ public class BinaryMinHeap <T extends Comparable<T>> implements MyPriorityQueue<
         this.arr = larger;
     }
 
+    // Insert an item into the heap, no return value
     @Override
     public void insert(T item){
         // If array is full then resize
@@ -121,6 +123,7 @@ public class BinaryMinHeap <T extends Comparable<T>> implements MyPriorityQueue<
         this.size++;
     }
 
+    // Remove the minimum value from the heap and return it
     @Override
     public T extract(){
         // If array is empty throw an IllegalStateException
