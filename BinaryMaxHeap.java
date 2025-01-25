@@ -136,7 +136,6 @@ public class BinaryMaxHeap <T extends Comparable<T>> implements MyPriorityQueue<
         return arr[0];
     }
 
-    @Override
     // Determine whether to percolate up/down
     // the item at the given index, then do it!
     private void updatePriority(int index){
@@ -146,6 +145,23 @@ public class BinaryMaxHeap <T extends Comparable<T>> implements MyPriorityQueue<
         } else {
             percolateDown(index);
         }
+    }
+
+    @Override
+    // This method gets called after the client has 
+    // changed an item in a way that may change its
+    // priority. In this case, the client should call
+    // updatePriority on that changed item so that 
+    // the heap can restore the heap property.
+    // Throws an IllegalArgumentException if the given
+    // item is not an element of the priority queue.
+    // We have provided a recommended implementation
+    // You're welcome to do something different, though!
+    public void updatePriority(T item){
+	if(!itemToIndex.containsKey(item)){
+            throw new IllegalArgumentException("Given item is not present in the priority queue!");
+	}
+        updatePriority(itemToIndex.get(item));
     }
 
     // We have provided a recommended implementation
