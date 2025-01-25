@@ -66,14 +66,9 @@ public class TopKHeap<T extends Comparable<T>> {
     // not a member of the heap.
     // The running time of this method should be O(log(n)+log(k)).
     public void updatePriority(T item){
-        // Find what heap item is in
-        MyPriorityQueue<T> heap = this.itemToHeap.get(item);
-        // If heap is null than item isn't in either heap so throw an error
-        if (heap == null) {
-            throw new IllegalArgumentException();
-        }
-        // Update item priority
-        heap.updatePriority(item);
+        // We can just remove the node and add it again
+        remove(item);
+        insert(item);
     }
 
     // Removes the given item from the data structure
