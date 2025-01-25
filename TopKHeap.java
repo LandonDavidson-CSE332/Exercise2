@@ -33,6 +33,8 @@ public class TopKHeap<T extends Comparable<T>> {
         // Add item into the topK min heap and itemToHeap hashmap
         this.topK.insert(item);
         this.itemToHeap.put(item, this.topK);
+        // Iterate size
+        this.size++;
         // If topK.size still less than or equal to k we are done so return
         if (this.topK.size() <= this.k) {
             return;
@@ -43,8 +45,6 @@ public class TopKHeap<T extends Comparable<T>> {
         // Then add it to the rest max heap and back to itemToHeap
         this.itemToHeap.put(kickedItem, rest);
         this.rest.insert(kickedItem);
-        // Iterate size
-        this.size++;
     }
 
     // Indicates whether the given item is among the 
