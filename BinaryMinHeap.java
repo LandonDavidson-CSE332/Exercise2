@@ -81,7 +81,7 @@ public class BinaryMinHeap <T extends Comparable<T>> implements MyPriorityQueue<
                 lowestIndex = this.arr[leftIndex].compareTo(this.arr[rightIndex]) < 0 ? leftIndex : rightIndex;
             }
             // If current value greater than the lowest child's, copy child to current index
-            if (this.arr[i].compareTo(this.arr[lowestIndex]) > 0) {
+            if (finalItem.compareTo(this.arr[lowestIndex]) > 0) {
                 this.arr[i] = this.arr[lowestIndex];
                 // Update child's index in itemToIndex hashmap
                 this.itemToIndex.replace(this.arr[i], i);
