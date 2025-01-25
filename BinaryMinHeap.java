@@ -105,6 +105,7 @@ public class BinaryMinHeap <T extends Comparable<T>> implements MyPriorityQueue<
         this.arr = larger;
     }
 
+    @Override
     public void insert(T item){
         // If array is full then resize
         if (this.size == this.arr.length) {
@@ -120,7 +121,7 @@ public class BinaryMinHeap <T extends Comparable<T>> implements MyPriorityQueue<
         this.size++;
     }
 
-
+    @Override
     public T extract(){
         // If array is empty throw an IllegalStateException
         if (this.size == 0) {
@@ -161,6 +162,7 @@ public class BinaryMinHeap <T extends Comparable<T>> implements MyPriorityQueue<
         return targetVal;
     }
 
+    @Override
     // We have provided a recommended implementation
     // You're welcome to do something different, though!
     public void remove(T item){
@@ -178,6 +180,7 @@ public class BinaryMinHeap <T extends Comparable<T>> implements MyPriorityQueue<
         }
     }
 
+    @Override
     // This method gets called after the client has 
     // changed an item in a way that may change its
     // priority. In this case, the client should call
@@ -194,24 +197,28 @@ public class BinaryMinHeap <T extends Comparable<T>> implements MyPriorityQueue<
         updatePriority(itemToIndex.get(item));
     }
 
+    @Override
     // We have provided a recommended implementation
     // You're welcome to do something different, though!
     public boolean isEmpty(){
         return size == 0;
     }
 
+    @Override
     // We have provided a recommended implementation
     // You're welcome to do something different, though!
     public int size(){
         return size;
     }
 
+    @Override
     // We have provided a recommended implementation
     // You're welcome to do something different, though!
     public T peek(){
         return arr[0];
     }
     
+    @Override
     // We have provided a recommended implementation
     // You're welcome to do something different, though!
     public List<T> toList(){
