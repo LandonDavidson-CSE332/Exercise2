@@ -6,6 +6,21 @@ import java.util.ArrayList;
 
 public class BinaryMaxHeap <T extends Comparable<T>> implements MyPriorityQueue<T> {
 
+    private int size; // Maintains the size of the data structure
+    private T[] arr; // The array containing all items in the data structure
+                     // index 0 must be utilized
+    private Map<T, Integer> itemToIndex; // Keeps track of which index of arr holds each item.
+
+    public BinaryMaxHeap(){
+        // This line just creates an array of type T. We're doing it this way just
+        // because of weird java generics stuff (that I frankly don't totally understand)
+        // If you want to create a new array anywhere else (e.g. to resize) then
+        // You should mimic this line. The second argument is the size of the new array.
+        arr = (T[]) Array.newInstance(Comparable.class, 10);
+        size = 0;
+        itemToIndex = new HashMap<>();
+    }
+
     // Return the index of the given index's parent
     private int getParent(int i){
         return i / 2;
