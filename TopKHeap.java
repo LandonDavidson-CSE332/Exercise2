@@ -30,6 +30,11 @@ public class TopKHeap<T extends Comparable<T>> {
     // Add the given item into the data structure.
     // The running time of this method should be O(log(n)+log(k)).
     public void insert(T item){
+        // Add item into the topK min heap
+        this.topK.insert(item);
+        // Now remove the minimum value from topK and add it to the rest max heap
+        T kickedItem = this.topK.extract();
+        this.rest.insert(kickedItem);
     }
 
     // Indicates whether the given item is among the 

@@ -5,7 +5,7 @@ public class Client {
     public static void main(String[] args){
         minHeapTester();
         maxHeapTester();
-        topKTester();
+//        topKTester();
     }
 
     public static void minHeapTester(){
