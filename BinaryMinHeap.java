@@ -93,7 +93,7 @@ public class BinaryMinHeap <T extends Comparable<T>> implements MyPriorityQueue<
             i = lowestIndex;
         }
         // Add percolated item to itemToIndex hashmap
-        this.itemToIndex.put(this.arr[i], i);
+        this.itemToIndex.replace(this.arr[i], i);
         // Copy saved value into the hole we created
         this.arr[i] = finalItem;
     }
@@ -112,6 +112,8 @@ public class BinaryMinHeap <T extends Comparable<T>> implements MyPriorityQueue<
         }
         // Put item in the first empty spot of the array
         this.arr[size] = item;
+        // Add item to itemToIndex hashmap
+        this.itemToIndex.put(item, size);
         // Percolate the new item up
         percolateUp(size);
         // Increment size
