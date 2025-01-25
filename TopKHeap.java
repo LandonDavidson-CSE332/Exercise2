@@ -32,11 +32,12 @@ public class TopKHeap<T extends Comparable<T>> {
     public void insert(T item){
         // Add item into the topK min heap and itemToHeap hashmap
         this.topK.insert(item);
-        this.itemToHeap.add(item, this.topK);
-        // Now remove the minimum value from topK and itemToHeap, then add it to the rest max heap and back to itemToHeap
+        this.itemToHeap.put(item, this.topK);
+        // Now remove the minimum value from topK and itemToHeap
         T kickedItem = this.topK.extract();
         this.itemToHeap.remove(item);
-        this.itemToHeap.add(item, rest);
+        // Then add it to the rest max heap and back to itemToHeap
+        this.itemToHeap.put(item, rest);
         this.rest.insert(kickedItem);
     }
 
@@ -59,6 +60,14 @@ public class TopKHeap<T extends Comparable<T>> {
     // not a member of the heap.
     // The running time of this method should be O(log(n)+log(k)).
     public void updatePriority(T item){
+        // Find what heap item is in
+        MyPriorityQueue<T> heap = this.itemToHeap.get(item);
+        // If heap is null than item isn't in either heap so throw an error
+        if (heap == null) {
+            throw new IllegalArgumentException();
+        }
+        // Update item priority
+        heap.updatePriority(item);
     }
 
     // Removes the given item from the data structure
