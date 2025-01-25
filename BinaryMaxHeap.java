@@ -91,43 +91,113 @@ public class BinaryMaxHeap <T extends Comparable<T>> implements MyPriorityQueue<
         this.arr = larger;
     }
 
+    // Insert an item into the heap, no return value
     @Override
     public void insert(T item) {
-
+        // If array is full then resize
+        if (this.size == this.arr.length) {
+            resize();
+        }
+        // Put item in the first empty spot of the array
+        this.arr[size] = item;
+        // Add item to itemToIndex hashmap
+        this.itemToIndex.put(item, size);
+        // Percolate the new item up
+        percolateUp(size);
+        // Increment size
+        this.size++;
     }
 
+    // Remove the minimum value from the heap and return it
     @Override
     public T extract() {
-        return null;
+        // If array is empty throw an IllegalStateException
+        if (this.size == 0) {
+            throw new IllegalStateException("The min heap is empty");
+        }
+        // Decrement size
+        this.size--;
+        // Remove the current root from the itemToIndex hashmap
+        this.itemToIndex.remove(this.arr[0]);
+        // Store the root node value
+        T maxVal = this.arr[0];
+        // Copy value at end of array to the head
+        this.arr[0] = this.arr[this.size];
+        // Percolate new root down
+        percolateDown(0);
+        // Return stored minimum value
+        return maxVal;
     }
 
+    // We have provided a recommended implementation
+    // You're welcome to do something different, though!
     @Override
     public T peek() {
-        return null;
+        return arr[0];
     }
 
     @Override
-    public void updatePriority(T item) {
-
+    // Determine whether to percolate up/down
+    // the item at the given index, then do it!
+    private void updatePriority(int index){
+        // If parent value is greater than index's then percolate up, otherwise go down
+        if (this.arr[index].compareTo(this.arr[getParent(index)]) < 0) {
+            percolateUp(index);
+        } else {
+            percolateDown(index);
+        }
     }
 
+    // We have provided a recommended implementation
+    // You're welcome to do something different, though!
     @Override
     public boolean isEmpty() {
-        return false;
+        return this.size == 0;
     }
 
+    // We have provided a recommended implementation
+    // You're welcome to do something different, though!
     @Override
     public int size() {
-        return 0;
+        return this.size;
     }
 
+    // We have provided a recommended implementation
+    // You're welcome to do something different, though!
     @Override
     public List<T> toList() {
-        return List.of();
+        List<T> copy = new ArrayList<>();
+        for(int i = 0; i < size; i++){
+            copy.add(i, arr[i]);
+        }
+        return copy;
+    }
+
+    // Remove the item at the given index.
+    // Make sure to maintain the heap property!
+    private T remove(int index){
+        // If array is empty throw an IllegalStateException
+        if (this.size == 0) {
+            throw new IllegalStateException("The min heap is empty");
+        }
+        // Decrement size
+        this.size--;
+        // Remove the item at index from the itemToIndex hashmap
+        this.itemToIndex.remove(this.arr[index]);
+        // Store the relevant nodes data
+        T targetVal = this.arr[index];
+        // Copy value at the end of the array to the target index
+        this.arr[index] = this.arr[size];
+        // Percolate the new node down
+        percolateDown(index);
+        // Return the stored target value
+        return targetVal;
     }
 
     @Override
-    public void remove(T item) {
-
+    // We have provided a recommended implementation
+    // You're welcome to do something different, though!
+    public void remove(T item){
+        remove(itemToIndex.get(item));
     }
 }
