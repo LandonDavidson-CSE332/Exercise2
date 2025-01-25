@@ -39,9 +39,9 @@ public class TopKHeap<T extends Comparable<T>> {
         }
         // Otherwise there are k + 1 players in topK so remove the minimum value from topK and itemToHeap
         T kickedItem = this.topK.extract();
-        this.itemToHeap.remove(item);
+        this.itemToHeap.remove(kickedItem);
         // Then add it to the rest max heap and back to itemToHeap
-        this.itemToHeap.put(item, rest);
+        this.itemToHeap.put(kickedItem, rest);
         this.rest.insert(kickedItem);
         // Iterate size
         this.size++;
