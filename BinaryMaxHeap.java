@@ -160,7 +160,7 @@ public class BinaryMaxHeap <T extends Comparable<T>> implements MyPriorityQueue<
     // the item at the given index, then do it!
     private void updatePriority(int index){
         // If parent value is less than index's then percolate up, otherwise go down
-        if (this.arr[index].compareTo(this.arr[getParent(index)]) < 0) {
+        if (this.arr[index].compareTo(this.arr[getParent(index)]) > 0) {
             percolateUp(index);
         } else {
             percolateDown(index);
